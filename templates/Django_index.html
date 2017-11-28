@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>DJANGO HOME PAGE</h1>
+
+{% for airport in airports %}
+  <p>
+    {{airport.name}}
+    ({{airport.upper_abbrev}})
+  </p>
+{% endfor %}
+
+{% endblock %}
