@@ -3,7 +3,7 @@
 
 <div ng-controller="homeController">
   <form ng-submit="submit()">
-    <input class="searchbox" type="text" ng-model="search_input" name="usersearch" placeholder="Search Airport (Ex: KORD)">
+    <input class="searchbox" type="text" ng-model="search_input" name="usersearch" placeholder="(Examples:  KORD, KMDW, KLAX)">
     <span class="small-alert" ng-if="search_input.length < 3 || search_input.length > 4">
       Must be valid 3-4 letter ICAO Airport Code
     </span>

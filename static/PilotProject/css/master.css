@@ -6,7 +6,7 @@ body{
 }
 
 .searchbox{
-  width: 200px;
+  width: 225px;
 }
 
 .btn-primary{
@@ -23,6 +23,20 @@ body{
 .small-alert{
   margin-left: 10px;
   font-style: italic;
+}
+
+.detailpage{
+  padding-top: 15px;
+}
+
+.errormessage{
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 1.25em;
+}
+.newsearch{
+  font-size: 1.2em;
+  padding-top: 15px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

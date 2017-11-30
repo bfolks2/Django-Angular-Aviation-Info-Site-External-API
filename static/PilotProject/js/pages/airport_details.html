@@ -1,10 +1,20 @@
-<div class="ng-cloak">
-  <h2><strong>{{ icao.toUpperCase() }} Details:</strong></h2>
-  {{ message }}
+<div class="ng-cloak detailpage">
 
-  <h4>{{ nameLabel }} {{ external.name }}</h4>
-  <h4>{{ elevationLabel }} {{ external.elevation }} {{ ftLabel }} </h4>
-  <h4>{{ runwaysLabel }} {{ external.runwayCount }}</h4>
-  <h4>{{ countryLabel }} {{ external.region }}</h4>
-  <h4>{{ METARLabel }} {{ external.weather.METAR }}</h4>
+  <div class="errormessage">
+    {{ message }}
+  </div>
+
+  <h2><strong>{{ header }}</strong></h2>
+
+  <h4>{{ name }} </h4>
+  <h4>{{ elevation }} </h4>
+  <h4>{{ runways }} </h4>
+  <h4>{{ country }} </h4>
+  <h4>{{ METAR }} </h4>
+</div>
+
+<div class="newsearch">
+  <p>
+    <a href="#/">{{ search }}</a>
+  </p>
 </div>

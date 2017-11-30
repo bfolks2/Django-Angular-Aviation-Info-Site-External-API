@@ -60,23 +60,27 @@ pilotApp.controller('airportController', ['$scope', '$routeParams', 'airportList
   $scope.icao = $routeParams.icao;
 
   if($scope.icao.length > 4 || $scope.icao.length < 3){
-    $scope.message = 'nope'
+    $scope.message = 'Must enter a valid 3-4 letter ICAO Airport Code'
   }
   else{
     airportList.getExternalData($scope.icao).then(function successCallback(response) {
 
-      //Labels to pass for cloaking purposes
-      $scope.nameLabel = "Airport Name: "
-      $scope.elevationLabel = "Elevation: "
-      $scope.ftLabel = " ft"
-      $scope.runwaysLabel = "Number of Runways: "
-      $scope.countryLabel = "Country: "
-      $scope.METARLabel = "Current METAR: "
-
       $scope.external = response.data;
       console.log($scope.external);
+
+      //Labels to pass for cloaking purposes
+      $scope.header = $scope.icao + " Details:"
+
+      $scope.name = "Airport Name: " + $scope.external.name
+      $scope.elevation = "Elevation: " + $scope.external.elevation
+      $scope.runways = "Number of Runways: " + $scope.external.runwayCount
+      $scope.country = "Country: " + $scope.external.region
+      $scope.METAR = "Current METAR: " + $scope.external.weather.METAR
+      
+      $scope.search = "Start New Search"
+
     }, function errorCallback(response) {
-      $scope.message = "Error, no airport exists in the database for " + $scope.icao.toUpperCase()
+      $scope.message = "Error, unable to load data for " + $scope.icao.toUpperCase()
       console.log(response.status);
     });
   }
