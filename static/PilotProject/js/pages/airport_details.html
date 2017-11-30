@@ -1,8 +1,10 @@
-<h2><strong>{{ icao.toUpperCase() }} Details:</strong></h2>
-{{ message }}
+<div class="ng-cloak">
+  <h2><strong>{{ icao.toUpperCase() }} Details:</strong></h2>
+  {{ message }}
 
-<h4>Airport Name: {{ external.name }}</h4>
-<h4>Elevation: {{ external.elevation }} ft</h4>
-<h4>Number of Runways: {{ external.runwayCount }}</h4>
-<h4>Country: {{ external.region }}</h4>
-<h4>Current METAR: {{ external.weather.METAR }}</h4>
+  <h4>{{ nameLabel }} {{ external.name }}</h4>
+  <h4>{{ elevationLabel }} {{ external.elevation }} {{ ftLabel }} </h4>
+  <h4>{{ runwaysLabel }} {{ external.runwayCount }}</h4>
+  <h4>{{ countryLabel }} {{ external.region }}</h4>
+  <h4>{{ METARLabel }} {{ external.weather.METAR }}</h4>
+</div>

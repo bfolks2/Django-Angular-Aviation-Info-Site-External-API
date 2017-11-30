@@ -10,8 +10,8 @@ pilotApp.config(function ($routeProvider) {
     })
 
     // .when('/airportDetails', {
-    //     templateUrl: '/static/PilotProject/js/pages/airport_details.html',
-    //     controller: 'airportController'
+    //     templateUrl: '/static/PilotProject/js/pages/airport_error.html',
+    //     controller: 'errorController'
     // })
 
     .when('/airportDetails/:icao', {

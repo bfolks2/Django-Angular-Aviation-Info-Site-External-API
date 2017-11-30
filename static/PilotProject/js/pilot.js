@@ -56,17 +56,30 @@ pilotApp.controller('homeController', ['$scope', '$location', 'airportList', fun
 
 pilotApp.controller('airportController', ['$scope', '$routeParams', 'airportList', function($scope, $routeParams, airportList) {
 
+
   $scope.icao = $routeParams.icao;
 
-  if($scope.icao.length !== 4){
+  if($scope.icao.length > 4 || $scope.icao.length < 3){
     $scope.message = 'nope'
   }
   else{
-    airportList.getExternalData($scope.icao).then(function(response){
+    airportList.getExternalData($scope.icao).then(function successCallback(response) {
+
+      //Labels to pass for cloaking purposes
+      $scope.nameLabel = "Airport Name: "
+      $scope.elevationLabel = "Elevation: "
+      $scope.ftLabel = " ft"
+      $scope.runwaysLabel = "Number of Runways: "
+      $scope.countryLabel = "Country: "
+      $scope.METARLabel = "Current METAR: "
+
       $scope.external = response.data;
       console.log($scope.external);
+    }, function errorCallback(response) {
+      $scope.message = "Error, no airport exists in the database for " + $scope.icao.toUpperCase()
       console.log(response.status);
     });
   }
+
 
 }]);
