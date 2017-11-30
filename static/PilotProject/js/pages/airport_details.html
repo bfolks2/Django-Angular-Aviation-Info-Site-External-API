@@ -1,6 +1,8 @@
-<h1>AIRPORT LIST3</h1>
-
-{{ icao }}
+<h2><strong>{{ icao.toUpperCase() }} Details:</strong></h2>
 {{ message }}
 
-<p>HOLA AGAIN</p>
+<h4>Airport Name: {{ external.name }}</h4>
+<h4>Elevation: {{ external.elevation }} ft</h4>
+<h4>Number of Runways: {{ external.runwayCount }}</h4>
+<h4>Country: {{ external.region }}</h4>
+<h4>Current METAR: {{ external.weather.METAR }}</h4>

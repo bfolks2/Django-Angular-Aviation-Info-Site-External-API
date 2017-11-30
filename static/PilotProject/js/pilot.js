@@ -1,11 +1,9 @@
-alert('working2')
-
 // MODULE
 var pilotApp = angular.module('pilotApp', ['ngRoute', 'ngResource']);
 
 pilotApp.factory('airportList', function ($http, $resource){
 
-    this.airport = 'KORD'
+    this.airport = ''
 
     this.getDjangoData = function(){
 
@@ -35,19 +33,23 @@ pilotApp.factory('airportList', function ($http, $resource){
 
 });
 
-pilotApp.controller('homeController', ['$scope', 'airportList', function($scope, airportList) {
+pilotApp.controller('homeController', ['$scope', '$location', 'airportList', function($scope, $location, airportList) {
 
-  $scope.search_input=''
+  $scope.search_input = airportList.airport;
+
+  $scope.$watch('search_input',function(){
+    airportList.airport = $scope.search_input;
+  });
 
   airportList.getDjangoData().then(function(response){
     $scope.airports = response.data;
     console.log($scope.airports);
   });
 
-  airportList.getExternalData('KPWK').then(function(response){
-    $scope.external = response.data;
-    console.log($scope.external);
-  });
+  $scope.submit = function(){
+    var urltext = "/airportDetails/" + airportList.airport
+    $location.path(urltext);
+  };
 
 }]);
 
@@ -60,7 +62,11 @@ pilotApp.controller('airportController', ['$scope', '$routeParams', 'airportList
     $scope.message = 'nope'
   }
   else{
-    $scope.message = 'yep'
+    airportList.getExternalData($scope.icao).then(function(response){
+      $scope.external = response.data;
+      console.log($scope.external);
+      console.log(response.status);
+    });
   }
 
 }]);

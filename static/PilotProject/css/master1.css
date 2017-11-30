@@ -4,3 +4,23 @@ body{
   padding-bottom: 30px;
   font-family: 'Open Sans',sans-serif;
 }
+
+.searchbox{
+  width: 200px;
+}
+
+.btn-primary{
+  background-color: #080808;
+  margin-top: 10px;
+  width: 100px;
+  height: 35px;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #222 !important;
+}
+
+.small-alert{
+  margin-left: 10px;
+  font-style: italic;
+}
