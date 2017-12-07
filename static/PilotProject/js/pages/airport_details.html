@@ -4,13 +4,16 @@
     {{ message }}
   </div>
 
-  <h2><strong>{{ header }}</strong></h2>
+  <div ng-if = "header">
+    <h3><u><strong>{{ header }}</strong></u></h3>
 
-  <h4>{{ name }} </h4>
-  <h4>{{ elevation }} </h4>
-  <h4>{{ runways }} </h4>
-  <h4>{{ country }} </h4>
-  <h4>{{ METAR }} </h4>
+    <p>Airport Name: {{ name }} </p>
+    <p>Elevation: {{ elevation }} </p>
+    <p>Number of Runways: {{ runways }} </p>
+    <p>Country: {{ country }} </p>
+    <p>Current Weather (Raw Format): {{ METAR }} </p>
+  </div>
+
 </div>
 
 <div class="newsearch">

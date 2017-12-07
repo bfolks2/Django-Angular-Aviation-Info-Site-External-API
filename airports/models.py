@@ -4,7 +4,10 @@ from django.db import models
 
 class Airport(models.Model):
     name = models.CharField(max_length=256)
-    abbrev = models.CharField(max_length=4)
+    icao = models.CharField(max_length=4, unique=True, default=None)
 
     def upper_abbrev(self):
-        return self.abbrev.upper()
+        return self.icao.upper()
+
+    def __str__(self):
+        return self.name

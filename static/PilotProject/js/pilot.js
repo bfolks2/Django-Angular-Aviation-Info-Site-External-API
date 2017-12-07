@@ -47,18 +47,19 @@ pilotApp.controller('homeController', ['$scope', '$location', 'airportList', fun
   });
 
   $scope.submit = function(){
-    var urltext = "/airportDetails/" + airportList.airport
+    var urltext = "/airportDetails/" + airportList.airport.toUpperCase()
     $location.path(urltext);
   };
 
 }]);
 
 
-pilotApp.controller('airportController', ['$scope', '$routeParams', 'airportList', function($scope, $routeParams, airportList) {
+pilotApp.controller('airportController', ['$scope', '$routeParams', '$http', 'airportList',
+function($scope, $routeParams, $http, airportList) {
 
+  $scope.icao = $routeParams.icao.toUpperCase();
 
-  $scope.icao = $routeParams.icao;
-
+  //Check to see if the ICAO is in the correct format
   if($scope.icao.length > 4 || $scope.icao.length < 3){
     $scope.message = 'Must enter a valid 3-4 letter ICAO Airport Code'
   }
@@ -68,15 +69,41 @@ pilotApp.controller('airportController', ['$scope', '$routeParams', 'airportList
       $scope.external = response.data;
       console.log($scope.external);
 
+      airportList.getDjangoData().then(function(response){
+        $scope.airports = response.data;
+        $scope.empty = true;
+
+        //Check to see if the airport requested exists in the Django Database
+        for (var i = 0; i < $scope.airports.length; i++) {
+          if ($scope.airports[i]['icao'] == $scope.icao) {
+            $scope.empty = false;
+          }
+        }
+
+        //If the airport is newly logged, create a copy in the Django Database
+        if ($scope.empty){
+
+          $scope.airport_dict = {
+            'name': $scope.external.name,
+            'icao': $scope.icao
+          }
+          console.log($scope.airport_dict);
+          $http.post('/airports/api/?format=json', $scope.airport_dict)
+        }
+
+      });
+
+
+
       //Labels to pass for cloaking purposes
       $scope.header = $scope.icao + " Details:"
 
-      $scope.name = "Airport Name: " + $scope.external.name
-      $scope.elevation = "Elevation: " + $scope.external.elevation
-      $scope.runways = "Number of Runways: " + $scope.external.runwayCount
-      $scope.country = "Country: " + $scope.external.region
-      $scope.METAR = "Current METAR: " + $scope.external.weather.METAR
-      
+      $scope.name = $scope.external.name
+      $scope.elevation = $scope.external.elevation + " ft"
+      $scope.runways = $scope.external.runwayCount
+      $scope.country = $scope.external.region
+      $scope.METAR = $scope.external.weather.METAR
+
       $scope.search = "Start New Search"
 
     }, function errorCallback(response) {

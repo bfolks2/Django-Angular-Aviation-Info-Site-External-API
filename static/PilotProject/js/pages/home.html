@@ -16,5 +16,5 @@
 <h3>Below is a list of all airports logged on this site</h3>
 
 <div ng-repeat="airport in airports">
-  {{ airport.name }} <a href="#/airportDetails/{{ airport.abbrev.toUpperCase() }}">({{ airport.abbrev.toUpperCase() }})</a>
+  {{ airport.name }} <a href="#/airportDetails/{{ airport.icao.toUpperCase() }}">({{ airport.icao.toUpperCase() }})</a>
 </div>
