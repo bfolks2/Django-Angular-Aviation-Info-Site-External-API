@@ -58,6 +58,7 @@ pilotApp.controller('airportController', ['$scope', '$routeParams', '$http', 'ai
 function($scope, $routeParams, $http, airportList) {
 
   $scope.icao = $routeParams.icao.toUpperCase();
+  $scope.is_liked = false;
 
   //Check to see if the ICAO is in the correct format
   if($scope.icao.length > 4 || $scope.icao.length < 3){
@@ -67,7 +68,7 @@ function($scope, $routeParams, $http, airportList) {
     airportList.getExternalData($scope.icao).then(function successCallback(response) {
 
       $scope.external = response.data;
-      // console.log($scope.external);
+      console.log($scope.external);
 
       airportList.getDjangoData().then(function(response){
         $scope.airports = response.data;
@@ -100,8 +101,11 @@ function($scope, $routeParams, $http, airportList) {
       });
 
       $scope.addLike = function(){
-        $scope.airport_dict.likes = $scope.airport_dict.likes + 1
-        $http.patch('/airports/api/?format=json', {'likes':$scope.airport_dict.likes, 'icao':$scope.icao})
+          if($scope.is_liked == false){
+            $scope.airport_dict.likes = $scope.airport_dict.likes + 1
+            $http.patch('/airports/api/?format=json', {'likes':$scope.airport_dict.likes, 'icao':$scope.icao})
+            $scope.is_liked = true;
+          }
       }
 
       //Labels to pass for cloaking purposes

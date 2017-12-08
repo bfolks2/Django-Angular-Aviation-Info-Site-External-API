@@ -5,7 +5,18 @@ body{
   font-family: 'Open Sans',sans-serif;
 }
 
+.clever{
+  font-size: 0.3em;
+  font-style: italic;
+}
+
+.homepage_desc{
+  font-size: 1.1em;
+  padding-bottom: 25px;
+}
+
 .searchbox{
+  margin-top: 5px;
   width: 225px;
 }
 
@@ -14,6 +25,7 @@ body{
   margin-top: 10px;
   width: 100px;
   height: 35px;
+  margin-top: 10px;
 }
 
 .btn-primary:hover, .btn-primary:focus {
@@ -23,6 +35,14 @@ body{
 .small-alert{
   margin-left: 10px;
   font-style: italic;
+}
+
+.homepage_list{
+  padding-top: 45px;
+}
+
+.homepage_airports{
+  font-size: 0.9em;
 }
 
 .detailpage{
