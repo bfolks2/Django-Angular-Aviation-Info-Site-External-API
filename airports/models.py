@@ -5,6 +5,7 @@ from django.db import models
 class Airport(models.Model):
     name = models.CharField(max_length=256)
     icao = models.CharField(max_length=4, unique=True, default=None)
+    likes = models.PositiveIntegerField(default=0)
 
     def upper_abbrev(self):
         return self.icao.upper()

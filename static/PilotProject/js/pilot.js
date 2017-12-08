@@ -43,7 +43,7 @@ pilotApp.controller('homeController', ['$scope', '$location', 'airportList', fun
 
   airportList.getDjangoData().then(function(response){
     $scope.airports = response.data;
-    console.log($scope.airports);
+    // console.log($scope.airports);
   });
 
   $scope.submit = function(){
@@ -67,15 +67,18 @@ function($scope, $routeParams, $http, airportList) {
     airportList.getExternalData($scope.icao).then(function successCallback(response) {
 
       $scope.external = response.data;
-      console.log($scope.external);
+      // console.log($scope.external);
 
       airportList.getDjangoData().then(function(response){
         $scope.airports = response.data;
         $scope.empty = true;
 
+        // console.log($scope.airports);
+
         //Check to see if the airport requested exists in the Django Database
         for (var i = 0; i < $scope.airports.length; i++) {
           if ($scope.airports[i]['icao'] == $scope.icao) {
+            $scope.airport_dict = $scope.airports[i]
             $scope.empty = false;
           }
         }
@@ -85,14 +88,16 @@ function($scope, $routeParams, $http, airportList) {
 
           $scope.airport_dict = {
             'name': $scope.external.name,
-            'icao': $scope.icao
+            'icao': $scope.icao,
+            'likes' : 0
           }
-          console.log($scope.airport_dict);
+
           $http.post('/airports/api/?format=json', $scope.airport_dict)
         }
 
-      });
+        console.log($scope.airport_dict);
 
+      });
 
 
       //Labels to pass for cloaking purposes
@@ -103,8 +108,6 @@ function($scope, $routeParams, $http, airportList) {
       $scope.runways = $scope.external.runwayCount
       $scope.country = $scope.external.region
       $scope.METAR = $scope.external.weather.METAR
-
-      $scope.search = "Start New Search"
 
     }, function errorCallback(response) {
       $scope.message = "Error, unable to load data for " + $scope.icao.toUpperCase()
