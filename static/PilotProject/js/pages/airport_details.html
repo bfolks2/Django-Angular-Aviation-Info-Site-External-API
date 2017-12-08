@@ -12,7 +12,13 @@
     <p>Number of Runways: {{ runways }} </p>
     <p>Country: {{ country }} </p>
     <p>Current Weather (Raw Format): {{ METAR }} </p>
-    <p>Likes: {{ airport_dict.likes }}</p>
+
+    Likes:
+    <a href="">
+      <img class="thumbs" src="/static/PilotProject/misc/thumbs-up.svg">
+      <span class="thumbs_yes">{{ airport_dict.likes }}</span>
+    </a>
+
   </div>
 
   <div class="newsearch">

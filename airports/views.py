@@ -28,3 +28,15 @@ class AirportAPIView(APIView):
 
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self,request, icao=None):
+
+        airport=get_object_or_404(Airport, icao=icao)
+
+        return Response({'method':'put'})
+
+    def patch(self,request, icao=None):
+
+        airport=get_object_or_404(Airport, icao=icao)
+
+        return Response({'method':'patch'})

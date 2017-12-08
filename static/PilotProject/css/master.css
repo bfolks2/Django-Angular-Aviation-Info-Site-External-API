@@ -34,6 +34,19 @@ body{
   font-style: italic;
   font-size: 1.25em;
 }
+
+.thumbs{
+  height: 15px;
+  width: 15px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.thumbs_yes{
+  color: #3097B6;
+  font-weight: 500;
+}
+
 .newsearch{
   font-size: 1.2em;
   padding-top: 15px;
