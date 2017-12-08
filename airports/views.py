@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from airports.models import Airport
 from airports.serializers import AirportSerializer
 
@@ -35,8 +35,19 @@ class AirportAPIView(APIView):
 
         return Response({'method':'put'})
 
-    def patch(self,request, icao=None):
+    def patch(self,request):
 
+        icao=request.data['icao']
         airport=get_object_or_404(Airport, icao=icao)
+
+        serializer = AirportSerializer(airport, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
         return Response({'method':'patch'})

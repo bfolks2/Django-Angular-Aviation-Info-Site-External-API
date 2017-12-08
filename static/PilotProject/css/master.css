@@ -35,6 +35,14 @@ body{
   font-size: 1.25em;
 }
 
+.detail_info{
+  font-size: 1.1em;
+}
+
+.detail_label{
+  text-decoration: underline;
+}
+
 .thumbs{
   height: 15px;
   width: 15px;

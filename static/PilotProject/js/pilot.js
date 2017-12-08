@@ -99,6 +99,10 @@ function($scope, $routeParams, $http, airportList) {
 
       });
 
+      $scope.addLike = function(){
+        $scope.airport_dict.likes = $scope.airport_dict.likes + 1
+        $http.patch('/airports/api/?format=json', {'likes':$scope.airport_dict.likes, 'icao':$scope.icao})
+      }
 
       //Labels to pass for cloaking purposes
       $scope.header = $scope.icao + " Details:"

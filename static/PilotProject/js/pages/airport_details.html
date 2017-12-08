@@ -4,19 +4,21 @@
     {{ message }}
   </div>
 
-  <div ng-if = "header">
+  <div class="detail_info" ng-if = "header">
     <h3><u><strong>{{ header }}</strong></u></h3>
 
-    <p>Airport Name: {{ name }} </p>
-    <p>Elevation: {{ elevation }} </p>
-    <p>Number of Runways: {{ runways }} </p>
-    <p>Country: {{ country }} </p>
-    <p>Current Weather (Raw Format): {{ METAR }} </p>
+    <p><span class="detail_label">Airport Name</span>: {{ name }} </p>
+    <p><span class="detail_label">Elevation</span>: {{ elevation }} </p>
+    <p><span class="detail_label">Number of Runways</span>: {{ runways }} </p>
+    <p><span class="detail_label">Country</span>: {{ country }} </p>
+    <p><span class="detail_label">Current Weather (METAR)</span>: {{ METAR }} </p>
 
-    Likes:
+    <span class="detail_label">Likes</span>:
     <a href="">
-      <img class="thumbs" src="/static/PilotProject/misc/thumbs-up.svg">
-      <span class="thumbs_yes">{{ airport_dict.likes }}</span>
+      <span ng-click="addLike()">
+        <img class="thumbs" src="/static/PilotProject/misc/thumbs-up.svg">
+        <span class="thumbs_yes">{{ airport_dict.likes }}</span>
+      </span>
     </a>
 
   </div>
