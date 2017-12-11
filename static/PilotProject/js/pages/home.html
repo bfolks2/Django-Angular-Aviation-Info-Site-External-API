@@ -1,26 +1,38 @@
-<h1><strong>PrepAir</strong> <span class="clever">(Pretty clever, huh?)</span></h1>
-<!-- <a href="#/airportList">ANGULAR AIRPORT LIST</a> -->
+<h1 class="title"><strong>PrepAir </strong><em>(Alpha Build)</em></h1>
+<div class="clever">
+  (Pretty clever, huh?)
+</div>
 
-<p class="homepage_desc">
-  PrepAir is built on Angular/Django, as a Single-Page-Application.
-  It gathers up-to-date airport information from an external API at
-  flightplandatabase.com.  It also stores other relevant information in
-  an internal Django database.  This internal database is so that users can
-  log additional information on an airport (likes, comments, pilot reports, etc.)
-  that can be stored and accessed alongside dynamic, real-time airport information.
-</p>
+<div class="homepage_desc">
+  <p>
+    PrepAir is built using Angular on the Front-End and Python/Django
+    on the Back-End.  It is contructed as a Single-Page-Application.
+    It gathers up-to-date airport information from an external API at
+    flightplandatabase.com.  It also stores other relevant information in
+    an internal Django database.  This internal database allows user to log
+    additional information on an airport (likes, comments, pilot reports, etc.)
+    that can be stored and accessed alongside dynamic, real-time airport information.
+  </p>
 
-<h3><u>Airport Search</u></h3>
+  <p>
+    The airport data on this site is compiled to aid in creating a flight plan simulation.
+  </p>
+</div>
 
-<div ng-controller="homeController">
-  <form ng-submit="submit()">
-    <input class="searchbox" type="text" ng-model="search_input" name="usersearch" placeholder="(Examples:  KORD, KMDW, KLAX)">
-    <span class="small-alert" ng-if="search_input.length < 3 || search_input.length > 4">
-      Enter a valid 3-4 letter ICAO Airport Code
-    </span>
-    <br>
-    <input type="submit" name="" ng-disabled="search_input.length < 3 || search_input.length > 4" class="btn btn-primary" value="Search">
-  </form>
+
+<div class="search_section">
+  <h2><u>Airport Search</u></h2>
+
+  <div ng-controller="homeController">
+    <form ng-submit="submit()">
+      <input class="searchbox" type="text" ng-model="search_input" name="usersearch" placeholder="(Examples:  KORD, KMDW, KLAX)">
+      <span class="small-alert" ng-if="search_input.length < 3 || search_input.length > 4">
+        Enter a valid 3-4 letter ICAO Airport Code
+      </span>
+      <br>
+      <input type="submit" name="" ng-disabled="search_input.length < 3 || search_input.length > 4" class="btn btn-primary" value="Search">
+    </form>
+  </div>
 </div>
 
 
@@ -30,4 +42,11 @@
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     {{ airport.name }} <a href="#/airportDetails/{{ airport.icao.toUpperCase() }}">({{ airport.icao.toUpperCase() }})</a>
   </div>
+</div>
+
+<div class="banner">
+  <p>The data available through this site is for flight simulation use only and must not be used for real-world aviation</p>
+  <a href="https://flightplandatabase.com">
+    <img src="https://static.flightplandatabase.com/images/data-banner/dark.min.png" alt="Data from the Flight Plan Database">
+  </a>
 </div>

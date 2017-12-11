@@ -9,10 +9,25 @@
 
     <p><span class="detail_label">Airport Name</span>: {{ name }} </p>
     <p><span class="detail_label">Elevation</span>: {{ elevation }} </p>
-    <p><span class="detail_label">Number of Runways</span>: {{ runways }} </p>
     <p><span class="detail_label">Country</span>: {{ country }} </p>
-    <p><span class="detail_label">Current Weather (METAR)</span>: {{ METAR }} </p>
 
+    <p><span class="detail_label">Runways ({{ runwayCount }})</span>:</p>
+    <div class="indent_list" ng-repeat="runway in runways">
+      Runway {{ runway }}
+    </div>
+
+    <br>
+
+    <p><span class="detail_label">Frequencies ({{ external.frequencies.length }})</span>:</p>
+    <div class="indent_list" ng-repeat="(name,numberList) in frequencies">
+        {{ name }} --- {{ numberList.join() }}
+    </div>
+
+    <br>
+    <!-- <p><span class="detail_label">Time</span>: {{getDatetime | date: 'MMM d, y - h:mm a'}} </p> -->
+    <p><span class="detail_label">Current Local Time</span>: {{ getDatetime() | date: 'MMM d, y - h:mm a' }} </p>
+    <p><span class="detail_label">Latest Weather (METAR)</span>: {{ getWeather() }} </p>
+    <br>
     <span class="detail_label">Likes</span>:
     <a href="">
       <span ng-click="addLike()">

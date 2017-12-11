@@ -5,14 +5,23 @@ body{
   font-family: 'Open Sans',sans-serif;
 }
 
+.title{
+
+}
+
 .clever{
-  font-size: 0.3em;
+  font-size: 0.9em;
   font-style: italic;
 }
 
 .homepage_desc{
   font-size: 1.1em;
+  padding-top: 25px;
   padding-bottom: 25px;
+}
+
+.search_section{
+
 }
 
 .searchbox{
@@ -45,6 +54,12 @@ body{
   font-size: 0.9em;
 }
 
+.banner{
+  padding-top: 125px;
+  text-align: center;
+  font-weight: 900;
+}
+
 .detailpage{
   padding-top: 15px;
 }
@@ -63,6 +78,10 @@ body{
   text-decoration: underline;
 }
 
+.indent_list{
+  padding-left: 30px;
+}
+
 .thumbs{
   height: 15px;
   width: 15px;
@@ -77,7 +96,7 @@ body{
 
 .newsearch{
   font-size: 1.2em;
-  padding-top: 15px;
+  padding-top: 25px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

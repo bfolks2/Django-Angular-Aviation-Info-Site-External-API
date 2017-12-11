@@ -43,7 +43,6 @@ pilotApp.controller('homeController', ['$scope', '$location', 'airportList', fun
 
   airportList.getDjangoData().then(function(response){
     $scope.airports = response.data;
-    // console.log($scope.airports);
   });
 
   $scope.submit = function(){
@@ -74,7 +73,6 @@ function($scope, $routeParams, $http, airportList) {
         $scope.airports = response.data;
         $scope.empty = true;
 
-        // console.log($scope.airports);
 
         //Check to see if the airport requested exists in the Django Database
         for (var i = 0; i < $scope.airports.length; i++) {
@@ -96,8 +94,6 @@ function($scope, $routeParams, $http, airportList) {
           $http.post('/airports/api/?format=json', $scope.airport_dict)
         }
 
-        console.log($scope.airport_dict);
-
       });
 
       $scope.addLike = function(){
@@ -108,14 +104,76 @@ function($scope, $routeParams, $http, airportList) {
           }
       }
 
+
+      $scope.runwayList = function(){
+        rlist=$scope.external.runways
+        half = rlist.length/2
+        output=[]
+
+        for (var i = 0; i < half; i++) {
+          if(rlist[i]['ident'].includes("L")){
+            rname = rlist[i]['ident'] + "/" + rlist[i+half+1]['ident']
+          }
+          else if(rlist[i]['ident'].includes("R")){
+            rname = rlist[i]['ident'] + "/" + rlist[i+half-1]['ident']
+          }
+          else{
+            rname = rlist[i]['ident'] + "/" + rlist[i+half]['ident']
+          }
+
+          dims = ' --- Width: ' + Math.round(parseInt(rlist[i]['width'])) + ' ft' +
+          ', Length: ' + Math.round(parseInt(rlist[i]['length'])) + ' ft' +
+          ', Surface: ' + rlist[i]['surface']
+
+          output.push(rname + dims)
+        }
+        return output
+      }
+
+
+      $scope.frequencyList = function(){
+        fdict = {};
+        flist = $scope.external.frequencies;
+
+        for (freq of flist) {
+          //Lower and round the frequency received from external API
+          fnum = (parseInt(freq['frequency'])/1000000).toFixed(2)
+          if (freq['name'] in fdict){
+            fdict[freq['name']].push(fnum.toString())
+          }
+          else{
+            fdict[freq['name']] = [fnum.toString()]
+          }
+        };
+        return fdict
+      };
+
+
+      $scope.getWeather =function(){
+        if ($scope.external.weather.METAR == null){
+          return 'No weather station at this airport'
+        }
+        else{
+          return $scope.external.weather.METAR
+        }
+      }
+
+
+      $scope.getDatetime = function(){
+        date=new Date()
+        return ((date.valueOf() + date.getTimezoneOffset() * 60000) + (parseInt($scope.external.timezone.offset)*1000))
+      };
+
       //Labels to pass for cloaking purposes
       $scope.header = $scope.icao + " Details:"
 
       $scope.name = $scope.external.name
-      $scope.elevation = $scope.external.elevation + " ft"
-      $scope.runways = $scope.external.runwayCount
+      $scope.elevation = $scope.external.elevation + " ft MSL"
+      $scope.runwayCount = $scope.external.runwayCount
       $scope.country = $scope.external.region
-      $scope.METAR = $scope.external.weather.METAR
+      $scope.runways = $scope.runwayList();
+      $scope.frequencies = $scope.frequencyList();
+
 
     }, function errorCallback(response) {
       $scope.message = "Error, unable to load data for " + $scope.icao.toUpperCase()
